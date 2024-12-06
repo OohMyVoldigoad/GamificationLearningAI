@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mahasiswa', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('nim')->unique();
-            $table->string('nama');
-            $table->string('jurusan');
+            $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
+            $table->text('question_text');
+            $table->enum('question_type', ['multiple_choice', 'long_text']);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('question');
     }
 };
